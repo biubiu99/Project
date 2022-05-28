@@ -1,0 +1,164 @@
+---
+title: |
+  | STATS 3DS3
+  | Homework assignment 5
+author: 
+  - "Ling Lu|400193735"
+date: "03/12/2021"
+output: 
+  pdf_document:
+    includes:
+      in_header: header.tex
+bibliography: STATS3DS3.bib
+
+---
+
+**Submit to Crowdmark using the link that was emailed to you.**
+
+**Due before 10:00 PM on Wednesday, March 24th, 2021.**
+
+**Assignments submitted after the due date will receive a zero grade.**
+
+**Answer all the questions.** 
+
+**Grading scheme: $\left\lbrace 0, 1, 2\right\rbrace$ points per question, including reference section, total of 20. We will convert this to 100\%.** 
+
+**Your assignment must conform to the Assignment Standards listed below.**
+
+* Write your name and student number on the title page. Submit the title page for Q0. There is no grade for Q0. We will not grade assignments without Q0. 
+
+* You may discuss homework problems with other students, but you have to prepare the written assignments yourself. You can mention one helper's name in the helper's section only. 
+
+* Please combine all your answers, the computer code, and the figures into one PDF file, and submit a copy to Crowdmark.
+
+* Please use **newpage** to write a solution for each part of a question.
+
+* Please choose the pages for each part of a question in Crowdmark. 
+
+* No screenshots are accepted for any reason.
+
+* The writing and referencing should be appropriate to the undergraduate level.
+
+* Various tools, including publicly available internet tools, may be used by the instructor to check the originality of submitted work.
+
+
+
+\newpage
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      collapse = TRUE, 
+                      comment = "#>")
+```
+
+\newpage
+
+## Question 1
+
+1.1 Define the term "Neural Network."
+[Hint: Consider defining neural network in terms of input, output, and one hidden layer]
+
+Neural network is computing system inspired by biological neural network that constitute animal brain.
+The neural network is constructed from 3 types of laryers:
+1.Input layer - initial data for the neural network.
+2.Hidden layers - intermediate layer between input and output layer and place where all the computation is done.
+3.Output layer -  produce theresult for given inputs.
+
+\newpage
+
+1.2 When working with a neural network in the `nnet` library in R, what two parameters might you tune?
+[Hint: Check the help page of `nnet` and the examples in Lecture 14.]
+
+size = number of units in the hidden layer and decay = weight decay parameter.
+
+
+\newpage
+
+1.3 Choose one of these tunable parameters and explain what it is.
+
+size = number of units in the hidden layer and decay = weight decay parameter.
+
+\newpage
+## Question 2
+
+2.1 The k-means algorithm alternates between computing the average point and assigning the points to clusters. How does this method differ from k-medoids?
+
+
+Both the k-means and k-medoids algorithms break the dataset into groups. K-means attempts to minimize the total squared error, while k-medoids minimizes the sum of dissimilarities between points labeled to be in a cluster and a point designated as the center of that cluster. In contrast to the k-means algorithm, k-medoids chooses datapoints as centers.
+\newpage
+
+2.2 How does k-means/k-medoids differ from hierarchical clustering?
+
+
+difference between K means and Hierachical clustering:
+1.Hierarchical clustering can’t handle big data well but K Means clustering can.
+2.In K Means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
+3.K Means clustering requires prior knowledge of K
+\newpage
+
+2.3 Explain how agglomerative hierarchical clustering works.
+
+1.first we need o calclate the dissimilarity between the N obejects.
+2.find the closest pair of clusters and assign them as one cluster.(we have N-1 clusters)
+3.find the closest clusters and assign them as one cluster. now we have N-2 clusters.
+4.repeat step2 and step3 unitl all observations are clustered into one single cluster of size N.
+
+\newpage
+## Question 3
+
+Consider the four silhouette plots shown below for a data set.
+
+3.1 What is the best number of clusters to choose and why?
+
+```{r out.width="100%", fig.align="center", echo=FALSE, warning=FALSE, message=FALSE}
+knitr::include_graphics("Q3_1_plot.png")
+
+```
+
+the best number of clusters to choose is 3 as the clusters are clearer than clusters2 and the width is comparably larger than clusters4 and cluster5.(sihouette meamsures how similar observations are within clusters and large average sihouete width shows an appropriate number of clusters. as a result, by the theorem of the shouette method, larger width indicates a more appropriate choice ) 
+
+\newpage
+
+## Question 4
+
+4.1 Consider the following output from R, where a principal components analysis is carried out on the banknote data. Use the help page to know about the banknote data. Using only the information given in the below output, calculate the proportion of the total variation in the data that each principal component explains.
+
+
+```{r}
+library(mclust)
+data(banknote)
+prcomp(banknote[,-1])
+```
+```{r}
+a<- prcomp(banknote[,-1])
+summary(a)
+```
+
+\newpage
+4.2 Interpret this principal components analysis. Do this in two steps:
+
+(i) Decide how many principal components to use in your analysis of these data.
+```{r}
+plot(prcomp(banknote[,-1]))
+```
+From the above, we can see that 4 PCs up to PC4 explains 97.32% variance of the data so the first 4PCs can be used in the analysis.
+
+(ii) Then give an interpretation, in terms of the data, for each of the components you use.
+
+by 6x6 table, we take the sample from 1-4 PCs:
+the maximum score in magnitude for PC1 is -0.76830499(variable Bottom).
+the maximum score in magnitude for PC2 is -0.65928988(variable top).
+the maximum score in magnitude for PC3 is 0.5917628 (variable diaonal).
+the maximum score in magnitude for PC4 is -0.5616918(variable length).
+as a result, the variable as Bottom, top,diaonal and length will explain the 97.32% of the whole dataset
+\newpage
+## Reference
+Ognjanovski, G. (2020, June 07). Everything you need to know about neural networks and Backpropagation - machine learning Made Easy... Retrieved March 18, 2021, from https://towardsdatascience.com/everything-you-need-to-know-about-neural-networks-and-backpropagation-machine-learning-made-easy-e5285bc2be3a
+
+E.M. Mirkes, K-means and K-medoids applet. University of Leicester, 2011
+\newpage
+## Helper's name
+
+You can write only one name.
+
+Lan Wang
